@@ -2,9 +2,11 @@
 
 import itertools
 
-class Dimension(object):
+
+class Dimension():
     def __init__(self, values):
         self.values = list(values)
+
     def collapse_gen(self):
         def collapse():
             values = self.values
@@ -19,13 +21,17 @@ class Dimension(object):
                     break
         return collapse
 
-class Space(object):
+
+class Space():
     def __init__(self):
         self.dimensions = {}
+
     def add_dim(self, name, values):
         self.dimensions[name] = Dimension(values)
+
     def add_strdim(self, name, values):
         self.dimensions[name] = Dimension("%s=%s" % (name, v) for v in values)
+
     def cube_gen_line_by_line(self):
         for line in self.dimensions.keys():
             values = []
@@ -40,6 +46,7 @@ class Space(object):
             values = itertools.product(*values)
             for v in values:
                 yield v
+
     def cube_gen(self):
         # corners
         values = []
@@ -64,6 +71,7 @@ class Space(object):
             values = itertools.product(*values)
             for v in values:
                 yield v
+
     def gen(self):
         values = []
         for dim in self.dimensions.keys():
@@ -71,7 +79,8 @@ class Space(object):
         values = itertools.product(*values)
         for v in values:
             yield v
-        
+
+
 if __name__ == '__main__':
     s = Space()
     # s.add_strdim("L=", ["a", "b", "c", "d"])
