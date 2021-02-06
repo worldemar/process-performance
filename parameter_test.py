@@ -3,25 +3,37 @@
 import pytest
 from parameter import Parameter
 
-def test_generators_1():
-    p = Parameter(name="p1", values=[1])
-    assert(list(p.line()) == [1])
-    assert(list(p.edges()) == [1,1])
-    assert(list(p.collapse()) == [1])
+test_data = [
+    (
+        "p1",
+        [1],
+        [{"p1": 1}],
+        [{"p1": 1}],
+        [{"p1": 1}]
+    ),
+    (
+        "p1",
+        [1, 2],
+        [{"p1": 1}, {"p1": 2}],
+        [{"p1": 1}, {"p1": 2}],
+        [{"p1": 1}, {"p1": 2}]
+    ),
+    (
+        "p1",
+        [1, 2, 3, 4],
+        [{"p1": 1}, {"p1": 4}],
+        [{"p1": 1}, {"p1": 2}, {"p1": 3}, {"p1": 4}],
+        [{"p1": 1}, {"p1": 4}, {"p1": 2}, {"p1": 3}]
+    )
+    ]
 
 
-def test_generators_2():
-    p = Parameter(name="p1", values=[1,2])
-    assert(list(p.line()) == [1,2])
-    assert(list(p.edges()) == [1,2])
-    assert(list(p.collapse()) == [1,2])
-
-
-def test_generators_4():
-    p = Parameter(name="p1", values=[1,2,3,4])
-    assert(list(p.line()) == [1,2,3,4])
-    assert(list(p.edges()) == [1,4])
-    assert(list(p.collapse()) == [1,4,2,3])
+@pytest.mark.parametrize("name,values,edges,line,collapse", test_data)
+def test_generators(name, values, edges, line, collapse):
+    param = Parameter(name=name, values=values)
+    assert list(param.gen_edges()) == edges
+    assert list(param.gen_line()) == line
+    assert list(param.gen_collapse()) == collapse
 
 
 def test_nonstring_name():
