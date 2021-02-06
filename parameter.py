@@ -36,6 +36,3 @@ class Parameter():
                 yield values.pop(-1)
             else:
                 break
-
-if __name__ == '__main__':
-    p = Parameter(name="foo", values=[])
