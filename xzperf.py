@@ -84,7 +84,7 @@ def redraw(datapoints):
     plt.savefig("z_%s.png" % int(time.time()), dpi=200)
 
 
-if __name__ == '__main__':
+if __name__ == '__main__': # noqa: MC0001
     known_datapoints = {}
     for fname in ["d:/my/src/xzperf/xzperf.txt",
                   "d:/my/src/xzperf/xzperf_err.txt"]:
