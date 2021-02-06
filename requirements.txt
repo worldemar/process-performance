@@ -1,2 +1,2 @@
-psutil==5.4.5
+psutil==5.8.0
 matplotlib==3.3.4
