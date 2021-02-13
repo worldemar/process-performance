@@ -1,17 +1,22 @@
 #!/usr/bin/env python3
+"""
+    One parameter for command line.
+    Provides generators to iterate over values.
+"""
 
 
 class Parameter():
     """
     Keeps single parameter name and values.
+
     Provides generators to iterate over values.
     """
 
     class NoValuesException(RuntimeError):
-        pass
+        """NoValuesException"""
 
     class NonStringNameException(RuntimeError):
-        pass
+        """NonStringNameException"""
 
     def __init__(self, name=None, values=None):
         self.name = name
@@ -28,8 +33,8 @@ class Parameter():
         """
         Generates all parameter values in order of addition.
         """
-        for v in self.values:
-            yield {self.name: v}
+        for value in self.values:
+            yield {self.name: value}
 
     def gen_edges(self):
         """

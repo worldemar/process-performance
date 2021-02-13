@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+"""
+    Tests for Parameters class
+"""
 
 import pytest
 from parameter import Parameter
@@ -47,6 +50,7 @@ test_data = [
 
 @pytest.mark.parametrize("params,corners,cube,fill", test_data)
 def test_generators(params, corners, cube, fill):
+    """test_generators"""
     param_space = Parameters(params)
     assert list(param_space.gen_corners()) == corners
     assert list(param_space.gen_cube()) == cube

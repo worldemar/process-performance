@@ -41,7 +41,7 @@ class Space():
                 values.append([
                     edge_value.values[0],
                     edge_value.values[-1]
-                    ])
+                ])
             values.append(line_value.values)
             values = itertools.product(*values)
             for v in values:
@@ -54,7 +54,7 @@ class Space():
             values.append([
                 dim_value.values[0],
                 dim_value.values[-1]
-                ])
+            ])
         values = itertools.product(*values)
         for v in values:
             yield v
@@ -67,7 +67,7 @@ class Space():
                 values.append([
                     edge_value.values[0],
                     edge_value.values[-1]
-                    ])
+                ])
             values = itertools.product(*values)
             for v in values:
                 yield v

@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+"""
+    Parameters class providing generators to iterate over
+    multi-dimensional space of several parameters
+"""
 
 import itertools
 from parameter import Parameter
