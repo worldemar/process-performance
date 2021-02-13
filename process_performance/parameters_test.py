@@ -45,7 +45,7 @@ test_data = [
             ({'p1': 3}, {'p2': 'b'}, {'p3': 'normal'})
         ]
     )
-    ]
+]
 
 
 @pytest.mark.parametrize("params,corners,cube,fill", test_data)

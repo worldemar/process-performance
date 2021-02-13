@@ -5,7 +5,7 @@
 """
 
 import itertools
-from parameter import Parameter
+from process_performance.parameter import Parameter
 
 
 class Parameters():
@@ -15,7 +15,16 @@ class Parameters():
     """
 
     def __init__(self, parameters=None):
-        self.parameters = parameters
+        if isinstance(parameters, list):
+            self.parameters = parameters
+        elif isinstance(parameters, dict):
+            self.parameters = []
+            for key, val in parameters.items():
+                self.parameters.append(Parameter(name=key, values=val))
+        else:
+            raise RuntimeError('parameters argument must be '
+                               + 'dict `{"name":[values]}` '
+                               + 'or list `[Parameter]`')
 
     def gen_cube(self):
         """
@@ -48,11 +57,26 @@ class Parameters():
         generators = [p.gen_line() for p in self.parameters]
         return itertools.product(*generators)
 
+    def gen(self, name):
+        """
+        Select generator by its string name.
+        """
+        return {
+            "corners": self.gen_corners,
+            "cube": self.gen_cube,
+            "fill": self.gen_fill
+        }[name]
 
-if __name__ == '__main__':
-    p1 = Parameter("p1", [1, 2, 3])
-    p2 = Parameter("p2", [4, 5, 6])
-    p3 = Parameter("p3", [7, 8, 9])
-    p = Parameters([p1, p2, p3])
-    for v in p.gen_cube():
-        print(v)
+
+def cmdline_gen(parameters=None, cmd=None, shape=None):
+    """
+    Generate command line list from parameters.
+    """
+    def dictify(value):
+        return {k: v for d in value for k, v in d.items()}
+    for param in parameters.gen(shape)():
+        param_dict = dictify(param)
+        cmd_formatted = []
+        for arg in cmd:
+            cmd_formatted.append(arg.format(**param_dict))
+        yield cmd_formatted
