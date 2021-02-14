@@ -4,8 +4,8 @@
 """
 
 import pytest
-from parameter import Parameter
-from parameters import Parameters
+from process_performance.parameter import Parameter
+from process_performance.parameters import Parameters
 
 test_data = [
     (

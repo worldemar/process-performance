@@ -4,7 +4,7 @@
 """
 
 import pytest
-from parameter import Parameter
+from process_performance.parameter import Parameter
 
 test_data = [
     (

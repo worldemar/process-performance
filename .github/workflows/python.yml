@@ -27,10 +27,10 @@ jobs:
         pip install -r requirements.txt
     - name: Lint with prospector
       run: |
-        prospector --test-warnings --strictness veryhigh
+        cd process_performance && prospector --test-warnings --strictness veryhigh
     - name: Test with pytest
       run: |
-        pytest --cov=./ --cov-report=xml
+        pytest -vv --cov=./ --cov-report=xml
     - name: Report code coverage
       run: |
         codecov

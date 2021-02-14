@@ -73,9 +73,13 @@ def cmdline_gen(parameters=None, cmd=None, shape=None):
     Generate command line list from parameters.
     """
     def dictify(value):
-        return {k: v for d in value for k, v in d.items()}
+        ret = {}
+        for d in value:
+            ret.update(d)
+        return ret
     for param in parameters.gen(shape)():
         param_dict = dictify(param)
+        # cmd_formatted = list(arg.format(**param_dict) for arg in cmd)
         cmd_formatted = []
         for arg in cmd:
             cmd_formatted.append(arg.format(**param_dict))
