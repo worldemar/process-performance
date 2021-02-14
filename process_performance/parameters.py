@@ -74,8 +74,8 @@ def cmdline_gen(parameters=None, cmd=None, shape=None):
     """
     def dictify(value):
         ret = {}
-        for d in value:
-            ret.update(d)
+        for param in value:
+            ret.update(param)
         return ret
     for param in parameters.gen(shape)():
         param_dict = dictify(param)
