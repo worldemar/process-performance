@@ -22,8 +22,8 @@ class Parameters():
             for key, val in parameters.items():
                 self.parameters.append(Parameter(name=key, values=val))
         else:
-            raise WrongParametersType('parameters argument must be '
-                               + 'dict `{"name":[values]}`')
+            raise Parameters.WrongParametersType('parameters argument must be '
+                                                    + 'dict `{"name":[values]}`')
 
     def gen_cube(self):
         """
