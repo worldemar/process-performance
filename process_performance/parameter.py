@@ -54,9 +54,7 @@ class Parameter():
         while True:
             if values:
                 yield {self.name: values.pop(0)}
-            else:
-                break
             if values:
                 yield {self.name: values.pop(-1)}
-            else:
+            if not values:
                 break

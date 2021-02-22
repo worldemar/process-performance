@@ -13,18 +13,17 @@ class Parameters():
     Collection of parameters with generator helpers for iterating over
     parameter values space.
     """
+    class WrongParametersType(RuntimeError):
+        """WrongParametersType"""
 
     def __init__(self, parameters=None):
-        if isinstance(parameters, list):
-            self.parameters = parameters
-        elif isinstance(parameters, dict):
+        if isinstance(parameters, dict):
             self.parameters = []
             for key, val in parameters.items():
                 self.parameters.append(Parameter(name=key, values=val))
         else:
-            raise RuntimeError('parameters argument must be '
-                               + 'dict `{"name":[values]}` '
-                               + 'or list `[Parameter]`')
+            raise WrongParametersType('parameters argument must be '
+                               + 'dict `{"name":[values]}`')
 
     def gen_cube(self):
         """
