@@ -23,7 +23,7 @@ class Parameters():
                 self.parameters.append(Parameter(name=key, values=val))
         else:
             raise Parameters.WrongParametersType('parameters argument must be '
-                                                    + 'dict `{"name":[values]}`')
+                                                 + 'dict `{"name":[values]}`')
 
     def gen_cube(self):
         """
